@@ -347,9 +347,9 @@ select  * FROM int_error_inside_2016_12_21  INTO outfile '/tmp/20161221_error.tx
 如果不知道数据库目录，可以 通过 “find /  -name  test.txt ” 命令查找 。
 
 导出数据库：
-mysqldump GameData -uroot -phoolai@123 -d -h10.66.102.179  > /tmp/GameData.sql
-mysqldump shouyou -uroot -phoolai@123 -d -h10.66.102.179  > /tmp/shouyou.sql
-mysqldump admin -uroot -phoolai@123 -h10.66.102.179  > /tmp/admin.sql
+mysqldump GameData -uroot -p123 -d -h127.0.0.1  > /tmp/GameData.sql
+mysqldump shouyou -uroot -p123 -d -h  > /tmp/shouyou.sql
+mysqldump admin -uroot -p123 -h  > /tmp/admin.sql
 
 
 
