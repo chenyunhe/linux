@@ -1,0 +1,7 @@
+查看进程
+netstat -apn
+查看某个进程状态
+ps aux | grep nginx
+终止进程
+kill -9  进程pid
+注：-9表示强迫立即终止进程
