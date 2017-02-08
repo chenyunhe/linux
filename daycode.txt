@@ -6,6 +6,10 @@ ps aux | grep nginx
 kill -9  进程pid
 注：-9表示强迫立即终止进程
 
+查看svn是否启动
+netstat -tunlp | grep svn
+
+
 查找己安装软件包的命令
 rpm -qa | grep subversion
 查看是否安装svn
