@@ -14,3 +14,5 @@ netstat -tunlp | grep svn
 rpm -qa | grep subversion
 查看是否安装svn
 svn --version
+
+svnserve -d -r /opt/svn/ #默认的启动端口号为3690
