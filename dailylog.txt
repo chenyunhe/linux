@@ -35,6 +35,11 @@ unzip -t wwwroot.zip
 unzip -j wwwroot.zip
 
 
+tar zxvf subversion-1.6.6.tar.gz
+tar zxvf subversion-deps-1.6.6.tar.gz
+tar 为解压命令，zxvf为tar命令的参数，用于解压tar.gz格式压缩的文件。
+
+
 清屏：clear(相当于翻页)
 
 php –v 版本
