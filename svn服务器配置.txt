@@ -93,8 +93,7 @@ netstat -tunlp | grep svn
 tcp 0 0 0.0.0.0:3690 0.0.0.0:* LISTEN 10973/svnserve
 10、如果想停止svn，则使用如下命令：
 killall svnserve
-11.启动
-svnserve -d -r /opt/svn
+
 
 客户端访问
 1、下载安装文件
