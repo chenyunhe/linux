@@ -90,7 +90,7 @@ chown -R svn:svn /opt/svn
 9、检查是否启动
 netstat -tunlp | grep svn
 如果显示以下信息说明启动成功
-tcp 0 0 0.0.0.0:9999 0.0.0.0:* LISTEN 10973/svnserve
+tcp 0 0 0.0.0.0:3690 0.0.0.0:* LISTEN 10973/svnserve
 10、如果想停止svn，则使用如下命令：
 killall svnserve
 11.启动
