@@ -1,0 +1,111 @@
+配置svn服务器 svn 版本1.6.11
+如果服务器上已经通过yum命令安装了svn
+
+查看是否安装了svn工具
+命令：rpm -qa | grep subversion(如果服务器已经安装了则不需要进行安装，如果没有安装可以进行全新的安装)
+或者 svn --version
+或者ps aux | grep svn
+
+配置svn
+1、建立SVN的根目录（这里的目录根据自己选择，以下拿根目录下的opt目录为例）
+mkdir -p /opt/svn/
+**************************************************************************
+2、建立一个产品仓库
+mkdir -p /opt/svn/
+svnadmin create /opt/svn/proj/
+如果你们的研发中心有多个产品组，每个产品组可以建立一个SVN仓库
+创建之后会在每个库仓库conf目录下生成三个文件
+-rwxr-xr-x. 1 xxx xxx 1141 Jan 23 09:36 authz
+-rwxr-xr-x. 1 xxx xxx  352 Jan 23 09:36 passwd
+-rwxr-xr-x. 1 xxx xxx 2254 Jan 23 08:20 svnserve.conf
+
+authz：负责账号权限的管理，控制账号是否读写权限
+passwd：负责账号和密码的用户名单管理
+svnserve.conf：svn服务器配置文件
+**************************************************************************
+3、修改版本配置库文件
+vi /opt/svn/proj/conf/svnserve.conf
+修改后的文件内容如下：以下四行前注释都去掉
+anon-access = none # 注意这里必须设置，否则所有用户不用密码就可以访问
+auth-access = write
+password-db = passwd
+authz-db = authz
+
+realm = proj
+对用户配置文件的修改是立即生效的，不必重启svn。
+**************************************************************************
+4、开始设置passwd用户账号信息
+vi /opt/svn/proj/conf/passwd
+添加账号信息如下：
+admin1 = admin123   表示 左边为账号  右边为密码 此处只添加一个账号 
+admin2 = admin123
+admin3 = admin123
+**************************************************************************
+5、开始设置authz. 用户访问权限
+vi /data/svn/proj/conf/authz
+修改完之后的内容如下：
+
+[groups]
+admin = admin1,admin2 
+[/]
+admin1 = rw
+admin2 = r
+admin3 =
+其中，1个用户组可以包含1个或多个用户，用户间以逗号分隔。
+说明：
+admin = admin,admin1  #admin 项目组包括两个用户admin,admin1
+[/]
+admin1 = rw #admin1 对根目录有读写权限
+admin3 = #admin3 对根目录没有任何权限
+admin2 = r #限制 admin2 只有读权限，其它用户有读写权限
+**************************************************************************
+6、注意：
+* 权限配置文件中出现的用户名必须已在用户配置文件中定义。
+* 对权限配置文件的修改立即生效，不必重启svn。
+用户组格式：
+[groups]
+其中，1个用户组可以包含1个或多个用户，用户间以逗号分隔。
+版本库目录格式：
+[<版本库>:/项目/目录]
+@<用户组名> = <权限>
+<用户名> = <权限>
+其中，方框号内部分可以有多种写法:
+[/],表示根目录及以下，根目录是svnserve启动时指定的，[/]就是表示对全部版本库设置权限。
+[proj:/] 表示对版本库proj设置权限；
+[proj:/abc] 表示对版本库proj中的abc项目设置权限；
+[proj:/abc/aaa] 表示对版本库proj中的abc项目的aaa目录设置权限；
+权限主体可以是用户组、用户或*，用户组在前面加@，*表示全部用户。
+权限可以是w、r、wr和空，空表示没有任何权限。
+**************************************************************************
+7、建立启动svn的用户
+useradd svn
+根据提示,为用户svn设置密码
+允许用户svn访问版本库:
+chown -R svn:svn /opt/svn
+8、启动svn：
+方式：svnserve -d -r /opt/svn/ #默认的启动端口号为3690
+
+-d表示以daemon方式（后台运行）运行；
+-r /opt/svn 指定根目录是/opt/svn。
+9、检查是否启动
+netstat -tunlp | grep svn
+如果显示以下信息说明启动成功
+tcp 0 0 0.0.0.0:9999 0.0.0.0:* LISTEN 10973/svnserve
+10、如果想停止svn，则使用如下命令：
+killall svnserve
+11.启动
+svnserve -d -r /opt/svn
+
+客户端访问
+1、下载安装文件
+window 64位的话下载：TortoiseSVN-1.7.6.22632-x64-svn-1.7.4.msi
+window 32位的话下载：TortoiseSVN-1.6.5.16974-win32-svn-1.6.5.msi
+2、通过客户端进行访问
+地址如下：
+svn://{your-server-ip}:3690/proj/
+注意：
+不要在浏览器中通过http的方式进行访问，如下地址：
+http://{your-server-ip}:3690/tshop/
+那样肯定是不行的，因为你没有配置http的服务，上面是安装独立的SVN服务器
+
+以上就是在已安装的svn之后的配置
