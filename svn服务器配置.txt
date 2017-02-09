@@ -78,10 +78,10 @@ admin2 = r #限制 admin2 只有读权限，其它用户有读写权限
 权限可以是w、r、wr和空，空表示没有任何权限。
 **************************************************************************
 7、建立启动svn的用户
-useradd svn
-根据提示,为用户svn设置密码
-允许用户svn访问版本库:
-chown -R svn:svn /opt/svn
+useradd user1
+根据提示,为用户user1设置密码
+允许用户user1访问版本库:
+chown -R user1:user1 /opt/svn
 8、启动svn：
 方式：svnserve -d -r /opt/svn/ #默认的启动端口号为3690
 
