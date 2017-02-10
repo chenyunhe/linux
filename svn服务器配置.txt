@@ -108,3 +108,8 @@ http://{your-server-ip}:3690/tshop/
 那样肯定是不行的，因为你没有配置http的服务，上面是安装独立的SVN服务器
 
 以上就是在已安装的svn之后的配置
+
+
+参考：http://www.centoscn.com/CentosServer/ftp/2013/1217/2244.html
+     http://www.cnblogs.com/mymelon/p/5483215.html
+
