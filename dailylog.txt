@@ -308,7 +308,7 @@ SELinux status:                 enabled
 1、临时关闭（不用重启机器）：
 setenforce 0                  ##设置SELinux 成为permissive模式
 
-安装完虚拟机没有iptables文件
+新安装完虚拟机没有iptables文件
 原因：在新安装的Linux系统中，防火墙默认是被禁掉的，一般也没有配置过任何防火墙的策略，所有不存在/etc/sysconfig/iptables文件。
 解决：
 在控制台使用iptables命令随便写一条防火墙规则，如：iptables -P OUTPUT ACCEPT
