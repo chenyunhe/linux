@@ -29,15 +29,13 @@ svn lock -m “LockMessage“ [--force] PATH
 svn unlock PATH 
 
 5、 更新到某个版本
-
-  svn update -r  m path
-   例如：
-      svn update如果后面没有目录，默认将当前目录以及子目录下的所有文件都更新到最新版本。
+svn update -r  m path
+例如：
+     svn update如果后面没有目录，默认将当前目录以及子目录下的所有文件都更新到最新版本。
      svn update -r  200   test.php(将版本库中的文件test.php还原到版本200)
      svn update test.php(更新，于版本库同步。如果在提交的时候提示过期的话，是因为冲突，需要先update，修改文件 ，然后清除svn resolved ，最后再提交commit)
    简写：svn up
 6、 查看文件或者目录状态
-
    1 ）svn status   path （目录下的文件和子目录的状态，正常状态不显示）
    【?：不在svn的控制中；M：内容被修改；C：发生冲突；A：预定加入到版本库；K：被锁定】
    2 ）svn status -v   path (显示文件和子目录状态)
@@ -45,7 +43,6 @@ svn unlock PATH
    注：svn status、svn diff和 svn revert这三条命令在没有网络的情况下也可以执行的，原因是svn在本地的.svn中保留了本地版本的原始拷贝。
 简写：svn st
 7、 删除文件
-
   svn delete   path -m  " delete test fle " 
    例如：svn delete svn:// 192.168.1.1 /pro/domain/test.php -m  " delete test file "
     或者直接svn delete test.php 然后再svn ci -m 'delete test file‘，推荐使用这种
@@ -71,7 +68,7 @@ svn diff   -r m:n path(对版本m和版本n比较差异)
    例如：svn merge -r  200 : 205   test.php（将版本200与205之间的差异合并到当前文件，但是一般都会产生冲突，需要处理一下）
 12、 SVN 帮助
 
-  svn help
+svn help
 svn help ci
 ------------------------------------------------------------------------------
 
@@ -81,14 +78,14 @@ svn help ci
 
 13、 版本库下的文件和目录列表
 
-  svn list  path
-   显示path目录下的所有属于版本库的文件和目录
+svn list  path
+显示path目录下的所有属于版本库的文件和目录
 简写：svn ls
 14、 创建纳入版本控制下的新目录
 
 svn mkdir : 创建纳入版本控制下的新目录。
 用法: 1、mkdir PATH...
-         2、mkdir URL...
+      2、mkdir URL...
 创建版本控制的目录。
 1、每一个以工作副本 PATH 指定的目录，都会创建在本地端，并且加入新增
      调度，以待下一次的提交。
@@ -106,7 +103,7 @@ svn revert : 恢复原始未改变的工作副本文件 (恢复大部份的本�
 
 svn switch (sw):   更新工作副本至不同的URL。
 用法: 1、switch URL [PATH]
-        2、switch --relocate FROM TO [PATH...]
+      2、switch --relocate FROM TO [PATH...]
 
 1、更新你的工作副本，映射到一个新的URL，其行为跟“svn update”很像，也会将
      服务器上文件与本地文件合并。这是将工作副本对应到同一仓库中某个分支或者标记的
