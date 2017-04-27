@@ -362,6 +362,10 @@ mysqldump GameData -uroot -p123 -d -h127.0.0.1  > /tmp/GameData.sql
 mysqldump shouyou -uroot -p123 -d -h  > /tmp/shouyou.sql
 mysqldump admin -uroot -p123 -h  > /tmp/admin.sql
 
+导入数据库
+source /tmp/userinfo.sql
+
+
 
 
 
