@@ -16,3 +16,7 @@ rpm -qa | grep subversion
 svn --version
 
 svnserve -d -r /opt/svn/ #默认的启动端口号为3690
+
+
+mysql 终止当前执行的命令  
+\c 可以退出当前行命令
